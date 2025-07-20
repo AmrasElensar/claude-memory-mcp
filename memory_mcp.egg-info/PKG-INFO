@@ -1,0 +1,165 @@
+Metadata-Version: 2.4
+Name: memory_mcp
+Version: 0.1.0
+Summary: MCP server implementation for LLM persistent memory
+Author-email: Aurora <example@example.com>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: pydantic<3.0.0,>=2.7.3
+Requires-Dist: sentence-transformers<3.0.0,>=2.7.0
+Requires-Dist: numpy<2.0.0,>=1.26.4
+Requires-Dist: hnswlib>=0.8.0
+Requires-Dist: fastapi>=0.111.0
+Requires-Dist: uvicorn>=0.29.0
+Requires-Dist: python-dotenv<2.0.0,>=1.0.1
+Requires-Dist: python-jose<4.0.0,>=3.3.0
+Requires-Dist: loguru<0.8.0,>=0.7.2
+Requires-Dist: anyio>=3.7.1
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2.2; extra == "dev"
+Requires-Dist: pytest-cov<5.0.0,>=4.1.0; extra == "dev"
+Requires-Dist: black<24.0.0,>=23.3.0; extra == "dev"
+Requires-Dist: isort<6.0.0,>=5.12.0; extra == "dev"
+Requires-Dist: mypy<2.0.0,>=1.3.0; extra == "dev"
+Dynamic: license-file
+
+# Claude Memory MCP Server
+
+An MCP (Model Context Protocol) server implementation that provides persistent memory capabilities for Large Language Models, specifically designed to integrate with the Claude desktop application.
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+## Overview
+
+This project implements optimal memory techniques based on comprehensive research of current approaches in the field. It provides a standardized way for Claude to maintain persistent memory across conversations and sessions.
+
+## Features
+
+- **Tiered Memory Architecture**: Short-term, long-term, and archival memory tiers
+- **Multiple Memory Types**: Support for conversations, knowledge, entities, and reflections
+- **Semantic Search**: Retrieve memories based on semantic similarity
+- **Automatic Memory Management**: Intelligent memory capture without explicit commands
+- **Memory Consolidation**: Automatic consolidation of short-term memories into long-term memory
+- **Memory Management**: Importance-based memory retention and forgetting
+- **Claude Integration**: Ready-to-use integration with Claude desktop application
+- **MCP Protocol Support**: Compatible with the Model Context Protocol
+- **Docker Support**: Easy deployment using Docker containers
+
+## Quick Start
+
+### Option 1: Using Docker (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/WhenMoon-afk/claude-memory-mcp.git
+cd claude-memory-mcp
+
+# Start with Docker Compose
+docker-compose up -d
+```
+
+Configure Claude Desktop to use the containerized MCP server (see [Docker Usage Guide](docs/docker_usage.md) for details).
+
+### Option 2: Standard Installation
+
+1. **Prerequisites**:
+   - Python 3.8-3.12
+   - pip package manager
+
+2. **Installation**:
+   ```bash
+   # Clone the repository
+   git clone https://github.com/WhenMoon-afk/claude-memory-mcp.git
+   cd claude-memory-mcp
+   
+   # Install dependencies
+   pip install -r requirements.txt
+   
+   # Run setup script
+   chmod +x setup.sh
+   ./setup.sh
+   ```
+
+3. **Claude Desktop Integration**:
+
+   Add the following to your Claude configuration file:
+
+   ```json
+   {
+     "mcpServers": {
+       "memory": {
+         "command": "python",
+         "args": ["-m", "memory_mcp"],
+         "env": {
+           "MEMORY_FILE_PATH": "/path/to/your/memory.json"
+         }
+       }
+     }
+   }
+   ```
+
+## Using Memory with Claude
+
+The Memory MCP Server enables Claude to remember information across conversations without requiring explicit commands. 
+
+1. **Automatic Memory**: Claude will automatically:
+   - Remember important details you share
+   - Store user preferences and facts
+   - Recall relevant information when needed
+
+2. **Memory Recall**: To see what Claude remembers, simply ask:
+   - "What do you remember about me?"
+   - "What do you know about my preferences?"
+
+3. **System Prompt**: For optimal memory usage, add this to your Claude system prompt:
+
+   ```
+   This Claude instance has been enhanced with persistent memory capabilities.
+   Claude will automatically remember important details about you across
+   conversations and recall them when relevant, without needing explicit commands.
+   ```
+
+See the [User Guide](docs/user_guide.md) for detailed usage instructions and examples.
+
+## Documentation
+
+- [User Guide](docs/user_guide.md)
+- [Docker Usage Guide](docs/docker_usage.md)
+- [Compatibility Guide](docs/compatibility.md)
+- [Architecture](docs/architecture.md)
+- [Claude Integration Guide](docs/claude_integration.md)
+
+## Examples
+
+The `examples` directory contains scripts demonstrating how to interact with the Memory MCP Server:
+
+- `store_memory_example.py`: Example of storing a memory
+- `retrieve_memory_example.py`: Example of retrieving memories
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. Check the [Compatibility Guide](docs/compatibility.md) for dependency requirements
+2. Ensure your Python version is 3.8-3.12
+3. For NumPy issues, use: `pip install "numpy>=1.20.0,<2.0.0"`
+4. Try using Docker for simplified deployment
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

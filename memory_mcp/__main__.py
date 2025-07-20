@@ -3,13 +3,14 @@ Command-line entry point for the Memory MCP Server
 """
 
 import os
+import sys
 import logging
 import argparse
 from pathlib import Path
 
 from loguru import logger
 
-from memory_mcp.mcp.server import MemoryMcpServer
+from memory_mcp.mcp.memory_server import MemoryMcpServer
 from memory_mcp.utils.config import load_config
 
 
@@ -38,7 +39,7 @@ def main() -> None:
     log_level = "DEBUG" if args.debug else "INFO"
     logger.remove()
     logger.add(
-        os.sys.stderr,
+        sys.stderr,
         level=log_level,
         format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
     )
