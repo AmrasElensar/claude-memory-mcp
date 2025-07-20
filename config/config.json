@@ -1,0 +1,26 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "debug": false
+  },
+  "memory": {
+    "max_short_term_items": 100,
+    "max_long_term_items": 1000,
+    "max_archival_items": 10000,
+    "consolidation_interval_hours": 24,
+    "short_term_threshold": 0.3,
+    "file_path": "/root/.memory_mcp/data/memory.json"
+  },
+  "embedding": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimensions": 384,
+    "cache_dir": "/root/.memory_mcp/cache"
+  },
+  "retrieval": {
+    "default_top_k": 5,
+    "semantic_threshold": 0.75,
+    "recency_weight": 0.3,
+    "importance_weight": 0.7
+  }
+}

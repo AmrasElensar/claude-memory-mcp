@@ -2,6 +2,12 @@ FROM python:3.12-slim as builder
 
 WORKDIR /app
 COPY requirements.txt pyproject.toml ./
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --user --no-warn-script-location -r requirements.txt
 
 FROM python:3.12-slim

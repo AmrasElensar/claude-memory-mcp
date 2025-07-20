@@ -2,6 +2,7 @@
 Command-line entry point for the Memory MCP Server
 """
 
+import asyncio
 import os
 import sys
 import logging
@@ -14,7 +15,7 @@ from memory_mcp.mcp.memory_server import MemoryMcpServer
 from memory_mcp.utils.config import load_config
 
 
-def main() -> None:
+async def main() -> None:
     """Entry point for the Memory MCP Server."""
     parser = argparse.ArgumentParser(description="Memory MCP Server")
     parser.add_argument(
@@ -70,8 +71,8 @@ def main() -> None:
     
     # Start the server
     server = MemoryMcpServer(config)
-    server.start()
+    await server.start()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
